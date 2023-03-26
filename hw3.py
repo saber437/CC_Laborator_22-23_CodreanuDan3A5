@@ -31,3 +31,9 @@ def read_data(f_n):
   blob= bucket.blob(f_name)
   return blob.download_as_string()
 
+def add_firestore(collect, d):
+  doc_id= db.collection(collect).document()
+  doc_id.st(data)
+
+
+
