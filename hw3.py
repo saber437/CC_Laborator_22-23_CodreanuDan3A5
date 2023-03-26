@@ -18,3 +18,16 @@ bucket = storage_client.get_bucket(bucket_name)
 publisher = pubsub_v1.PublisherClient()
 topic_name = 'topic_name'
 topic_path = publisher.topic_path('project_id', topic_name)
+
+def pub_info(info):
+  d=info.encode('utf-8')
+  publisher.publish(topic_path, d=d) 
+
+def write_data(f_name,d):
+  blob= bucket.blob(f_name)
+  blob.upload_from_string(d)
+  
+def read_data(f_n):
+  blob= bucket.blob(f_name)
+  return blob.download_as_string()
+
