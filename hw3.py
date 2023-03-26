@@ -1,7 +1,10 @@
 import os
+import firebase_admin
 from google.cloud import storage
 from google.cloud import pubsub_v1
 from google.cloud import firestore
+from firebase_admin import credentials
+
 
 # Set up authentication
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/your/credentials.json'
@@ -34,6 +37,12 @@ def read_data(f_n):
 def add_firestore(collect, d):
   doc_id= db.collection(collect).document()
   doc_id.st(data)
+
+def get_all_firestore_data(project_id, collection_name):
+  pieces = db.collection(collection_name).get()
+  res = [piece.to_dict() for piece in pieces]
+  return res
+
 
 
 
